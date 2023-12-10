@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/CSS/Style.css">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>BOI-EMP</title>
+    <link rel="icon" href="{{ url_for('static', filename='Images/boi.jpg') }}" type="image/x-icon">
+    <style>
+        input text {
+            width: 100%;
+        }
+
+        td {
+            width: 600px;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        table {
+            border-spacing: 0 10px; /* 20px vertical spacing, 0 horizontal spacing */
+        }
+
+        .table2 tr {
+            margin: 30px;
+        }
+
+        #entEditor {
+            margin-left: 50px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="nav" style="margin-top: 1rem; justify-content: center">
+        <div>
+            <img class="nav-img-editor" src="{{ url_for('static', filename='Images/BOI-LOGO.png') }}"
+             style="margin-right: 15px" alt="BOI-LOGO">
+        </div>
+        <div class="heading-container">
+            <h2 class="editor-heading">BOI SRI LANKA<br> BIYAGAMA EXPORT PROCESSING ZONE</h2>
+        </div>
+        <div>
+            <img class="nav-img-editor" src="{{ url_for('static', filename='Images/sri-lanka-emblem.png') }}"
+              alt="Emblem">
+        </div>
+    </div>
+</div>
+<h4 style="margin: 3rem; font-style: italic; text-align: center">Enterprise Management Portal</h4>
+
+<div style="margin: 70px">
+    <p style="font-weight: bolder">{{ Message }}</p>
+</div>
+<section style="height: 90%">
+    <div id="accordion" style="margin: 80px">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-dep-sub" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true"
+                            aria-controls="collapseOne"
+                            id="btnOne"
+                    >
+                        Edit Enterprise Data
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <form method="post" action="{{ url_for('tinValidation') }}">
+                        <div class="form-group">
+                            <label for="tin">Company Tin No.</label>
+                            <input type="text" class="form-control" id="tin" name="tin"
+                                   aria-describedby="emailHelp"
+                                   placeholder="Enter the Project Tin No. here">
+                        </div>
+
+                        <p id="err" class="error-message" style="color: red;font-weight: bold">
+                            {% if ErrorMessage!=None %}
+                                {{ ErrorMessage }}
+                            {% endif %}
+                        </p>
+                        <button type="submit" class="btn btn-success">Next</button>
+                    </form>
+                    <div id="entEditor" class="d-flex justify-content-center">
+                        {% if Descs != None %}
+                            {% for d in Descs %}
+                                <form method="post" action="{{ url_for('SubmitValues') }}"
+                                      enctype="multipart/form-data">
+                                    <table>
+                                        <tr>
+                                            <th><input type="hidden" name="ID" id="ID" value="{{ d[0] }}"></th>
+                                        </tr>
+
+                                        <tr>
+                                            <th><label for="EntName"> Company Name *</label></th>
+                                            <td>
+                                                <input type="text" value="{{ d[1] }}" class="form-control"
+                                                       name="EntName"
+                                                       id="EntName" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="year"> Year Of Establishment *</label></th>
+                                            <td>
+                                                <input type="text" value="{{ d[2] }}" class="form-control" name="year"
+                                                       id="year" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="products">Products/Services</label></th>
+                                            <td>
+                                                <input type="text" value="{{ d[3] }}" class="form-control"
+                                                       name="products"
+                                                       id="products" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="emp">Employment</label></th>
+                                            <td>
+                                                <input type="text" name="emp" id="emp" class="form-control"
+                                                       value="{{ d[4] }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="parent"> Name Of Parent Company</label></th>
+                                            <td>
+                                                <input type="text" name="parent" class="form-control" id="parent"
+                                                       value="{{ d[5] }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="colab">Country Of Collaboration *</label></th>
+                                            <td>
+                                                <input type="text" name="colab" class="form-control" id="colab"
+                                                       value="{{ d[6] }}" required>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="global"> Global Presence *</label></th>
+                                            <td>
+                                                <input type="text" name="global" class="form-control" id="global"
+                                                       value="{{ d[7] }}" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="market">Key Markets *</label></th>
+                                            <td>
+                                                <input type="text" name="market" class="form-control" id="market"
+                                                       value="{{ d[8] }}" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="contact"> Contact</label></th>
+
+                                            <td>
+                                                <input type="text" name="contact" class="form-control" id="contact"
+                                                       value="{{ d[9] }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="info"> More Info</label></th>
+                                            <td>
+                                                <input type="text" name="info" class="form-control" id="info"
+                                                       value="{{ d[10] }}">
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="vid"> Enterprise Video</label></th>
+                                            <td>
+                                                <input type="file" id="vid" name="vid" accept="video/mp4"/>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="img1"> Transition image-1 </label></th>
+                                            <td>
+                                                <input type="file" id="img1" name="img1"
+                                                       accept="image/png, image/jpeg"/>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="img2"> Transition image-2</label></th>
+                                            <td>
+                                                <input type="file" id="img2" name="img2"
+                                                       accept="image/png, image/jpeg"/>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="img3"> Transition image-3</label></th>
+                                            <td>
+                                                <input type="file" id="img3" name="img3"
+                                                       accept="image/png, image/jpeg"/>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th><label for="img4"> Transition image-4</label></th>
+                                            <td>
+                                                <input type="file" id="img4" name="img4"
+                                                       accept="image/png, image/jpeg"/>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <input type="submit" class="btn btn-success btn-lg btn-block" value="Upload"
+                                           style="margin-top: 45px">
+                                </form>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-dep-sub" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo" id="btnTwo">
+                        Add New Enterprise
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <form method="post" id="addENT" action="{{ url_for('AddNewEnterprise') }}"
+                          enctype="multipart/form-data">
+                        <table class="table2 table">
+                            <tr>
+                                <th>
+                                    <label for="tin2">Company Tin No.</label>
+                                </th>
+                                <td>
+                                    <input type="number" class="form-control" id="tin2" name="tin2"
+                                           aria-describedby="emailHelp"
+                                           placeholder="Enter the Project Tin No. here" required>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td><p id="2-err">{{ ER2 }}</p></td>
+                            </tr>
+
+                            <tr>
+                                <th><label for="EntName2"> Company Name *</label></th>
+                                <td>
+                                    <input type="text" value="" class="form-control" name="EntName2"
+                                           id="EntName2" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th> Select The Sectors</th>
+                                <td>
+                                    <div style="padding: 20px">
+                                        {% for sector in Sectors %}
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="{{ sector[0] }}"
+                                                       id="{{ sector[0] }}" name="sectorRadio2" required>
+                                                <label class="form-check-label" for="{{ sector[0] }}">
+                                                    {{ sector[1] }}
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Select the Countries of Collaboration</th>
+                                <td style="padding: 20px">
+                                    <table id="dataList" class="table table-sm" style="width: 100%;">
+                                        {% for country in Countries %}
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                               value="{{ country[0] }}"
+                                                               id="{{ country[0] }}" name="countryCheckbox">
+                                                        <label class="form-check-label" for="{{ country[0] }}">
+                                                            {{ country[1] }}
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">
+                                    **For Editing further data Enter the Company Tin on "Edit Enterprise Data"**
+
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="submit" class="btn btn-success btn-lg btn-block" value="Upload"
+                               style="margin-top: 45px">
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-dep-sub" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree" id="btnThree">
+                        Remove Project
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <form method="post"  action="{{ url_for('removeEnterprise') }}"
+                          enctype="multipart/form-data" onsubmit="return confirm('Are you sure you want to remove the enterprise?')">
+                        <table class="table2 table">
+                            <tr>
+                                <th>
+                                    <label for="tin3">Company Tin No.</label>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <input type="number" class="form-control" id="tin3" name="tin3"
+                                           aria-describedby="emailHelp"
+                                           placeholder="Enter the Project Tin No. here" required>
+                                </th>
+                            </tr>
+                        </table>
+                        <input type="submit" class="btn btn-danger btn-lg btn-block"
+                               style="margin-top: 45px" value="Remove">
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    // get the table element
+    var $table = document.getElementById("dataList"),
+        // number of rows per page
+        $n = 15,
+        // number of rows of the table
+        $rowCount = $table.rows.length,
+        // get the first cell's tag name (in the first row)
+        $firstRow = $table.rows[0].firstElementChild.tagName,
+        // boolean var to check if table has a head row
+        $hasHead = ($firstRow === "TH"),
+        // an array to hold each row
+        $tr = [],
+        // loop counters, to start count from rows[1] (2nd row) if the first row has a head tag
+        $i, $ii, $j = ($hasHead) ? 1 : 0,
+        // holds the first row if it has a (<TH>) & nothing if (<TD>)
+        $th = ($hasHead ? $table.rows[(0)].outerHTML : "");
+    // count the number of pages
+    var $pageCount = Math.ceil($rowCount / $n);
+    // if we had one page only, then we have nothing to do ..
+    if ($pageCount > 1) {
+        // assign each row outHTML (tag name & innerHTML) to the array
+        for ($i = $j, $ii = 0; $i < $rowCount; $i++, $ii++)
+            $tr[$ii] = $table.rows[$i].outerHTML;
+        // create a div block to hold the buttons
+        $table.insertAdjacentHTML("afterend", "<div id='buttons'></div");
+        // the first sort, default page is the first one
+        sort(1);
+    }
+
+    // ($p) is the selected page number. it will be generated when a user clicks a button
+    function sort($p) {
+        /* create ($rows) a variable to hold the group of rows
+        ** to be displayed on the selected page,
+        ** ($s) the start point .. the first row in each page, Do The Math
+        */
+        var $rows = $th, $s = (($n * $p) - $n);
+        for ($i = $s; $i < ($s + $n) && $i < $tr.length; $i++)
+            $rows += $tr[$i];
+
+        // now the table has a processed group of rows ..
+        $table.innerHTML = $rows;
+        // create the pagination buttons
+        document.getElementById("buttons").innerHTML = pageButtons($pageCount, $p);
+        // CSS Stuff
+        document.getElementById("id" + $p).setAttribute("class", "active");
+    }
+
+
+    // ($pCount) : number of pages,($cur) : current page, the selected one ..
+    function pageButtons($pCount, $cur) {
+        /* this variables will disable the "Prev" button on 1st page
+           and "next" button on the last one */
+        var $prevDis = ($cur == 1) ? "disabled" : "",
+            $nextDis = ($cur == $pCount) ? "disabled" : "",
+
+            $buttons = "<input type='button' value='<< Prev' onclick='sort(" + ($cur - 1) + ")' " + $prevDis + ">";
+        for ($i = 1; $i <= $pCount; $i++)
+            $buttons += "<input type='button' id='id" + $i + "'value='" + $i + "' onclick='sort(" + $i + ")'>";
+        $buttons += "<input type='button' value='Next >>' onclick='sort(" + ($cur + 1) + ")' " + $nextDis + ">";
+        return $buttons;
+    }
+</script>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

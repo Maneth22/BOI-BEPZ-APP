@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/CSS/Style.css">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <title>BOI-BiyagamaZone</title>
+    <link rel="icon" href="{{ url_for('static', filename='Images/boi.jpg') }}" type="image/x-icon">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="margin-left: 1rem; padding-top: 8px; margin-top: 20px; font-weight: bolder;color: #277e1b">Engineering Services Department</h2>
+
+<section style="height: 80%">
+    <div id="accordion" style="margin-top: 40px">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-dep-sub" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="false"
+                            aria-controls="collapseOne">
+                        Department Staff
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>Senior Deputy Director (SDD)</th>
+                            <td>U.D. Ukwattha</td>
+                        </tr>
+                        <tr>
+                            <th>Junior Engineer</th>
+                            <td>A.C.Gayan De Silva</td>
+                        </tr>
+                        <tr>
+                            <th>Technical Officer</th>
+                            <td>M.M.A.N. Ariyarathna</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">Technical Assistant</th>
+                            <td>M.T.N. Peiris</td>
+                        </tr>
+                        <tr>
+                            <td>I.H. Gayathma Giyanthi	/td>
+                        </tr>
+
+                        <tr>
+                            <th>Electrician</th>
+                            <td>P.A. Upali Dhammika</td>
+                        </tr>
+                        <tr>
+                            <th>Office Aid</th>
+                            <td>G. Gunapala</td>
+                        </tr>
+                        <tr>
+                            <th>Plumber</th>
+                            <td>L.S.J. Perera</td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">Labourer / Carpenter Helper</th>
+                            <td>P. Samarawicrama</td>
+                        </tr>
+                        <tr>
+                            <td>N.A. Jayampathi</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-dep-sub" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                        Responsibilities
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <ul>
+                        <li>Providing infrastructure facilities efficiently at BEPZ.</li>
+                        <li>Co-ordination with agencies providing infrastructure facilities.</li>
+                        <li>Assist investors to resolve problems faced by them with regard to infrastructure needs.</li>
+                        <li>Facilitate approvals for factory building plans at BEPZ and issue certificate of conformity for the factory building.</li>
+                        <li>Quantify the duty-free import of construction materials to projects at BEPZ.</li>
+                        <li>Management of budgets in relation to Capital works and Recurrent works</li>
+                        <li>Contract Management.</li>
+                        <li>Make recommendations for site clearance for the investment projects.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script>
+    // Get the button
+    let mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
